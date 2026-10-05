@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { MapPin, Phone, MessageSquare, Clock, Calendar, Navigation, Sparkles, Send } from 'lucide-react';
 import { STORE_INFO } from '@/data/storeData';
 
@@ -121,13 +122,17 @@ export default function LocationSection() {
 
           {/* Interactive Map Visual (Right side) */}
           <div className="lg:col-span-6 bg-slate-100 rounded-3xl overflow-hidden border border-slate-200 shadow-md relative h-96 sm:h-[420px] flex flex-col justify-between p-6">
-            {/* Map styling representation */}
-            <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1.5px,transparent_1.5px)] [background-size:24px_24px] bg-slate-100"></div>
+            {/* Google Maps Style Clean Map Background Image */}
+            <Image
+              src="/images/map-preview.jpg"
+              alt="Store Map Location"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center"
+            />
             
-            {/* Simulated Map Roads / Visual Graphic */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none">
-              <div className="w-64 h-64 border-4 border-dashed border-slate-300 rounded-full animate-spin-slow"></div>
-            </div>
+            {/* Subtle overlay for high contrast of badges and markers */}
+            <div className="absolute inset-0 bg-slate-900/10 pointer-events-none"></div>
 
             {/* Top Map Floating Badge */}
             <div className="relative bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-md border border-slate-200 inline-flex items-center gap-3 self-start">
