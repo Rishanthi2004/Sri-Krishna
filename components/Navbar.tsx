@@ -1,0 +1,280 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Phone, Menu, X, Building2, ChevronRight, MessageSquare, Clock, MapPin, Layers, Award } from 'lucide-react';
+import { STORE_INFO } from '@/data/storeData';
+
+interface NavbarProps {
+  onOpenQuote: () => void;
+}
+
+export default function Navbar({ onOpenQuote }: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [mobileMenuOpen]);
+
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Products', href: '#products' },
+    { name: 'Services', href: '#services' },
+    { name: 'Brands', href: '#brands' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setMobileMenuOpen(false);
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-40 w-full transition-all duration-300">
+      {/* Top Slim Announcement Bar */}
+      <div className="bg-[#0B192C] text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 tracking-wide font-medium text-slate-300">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>{STORE_INFO.tagline}</span>
+          </div>
+          <div className="hidden md:flex items-center gap-6 text-slate-300 text-xs">
+            <span className="flex items-center gap-1.5">
+              <span className="text-orange-400 font-semibold">Dealer:</span> Santé Bath Fittings
+            </span>
+            <span className="text-slate-500">|</span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-emerald-400 font-semibold">Hours:</span> Mon-Sat 8AM-9PM • Sun 8AM-6:30PM
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navbar */}
+      <nav
+        className={`w-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-md py-3.5 border-b border-slate-100'
+            : 'bg-white py-4 border-b border-slate-100'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 flex items-center justify-between gap-1.5 sm:gap-2">
+          
+          {/* Left Area: Mobile Hamburger Button on Left + Brand Logo & Name */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
+            {/* Hamburger Menu on the LEFT side (Mobile only) */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden p-1.5 -ml-1 text-slate-800 hover:bg-slate-100 rounded-lg transition focus:outline-none flex items-center justify-center cursor-pointer shrink-0"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="w-5 h-5 text-slate-900" />
+            </button>
+
+            {/* Brand Logo & Name */}
+            <Link 
+              href="#home" 
+              onClick={(e) => handleNavClick(e, '#home')}
+              className="flex items-center gap-1.5 sm:gap-3 group focus:outline-none min-w-0"
+            >
+              <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#0B192C] to-[#1E3E62] flex items-center justify-center text-white shadow-md shadow-slate-900/10 group-hover:scale-105 transition-transform duration-300 shrink-0">
+                <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-orange-400" />
+              </div>
+              <div className="flex flex-col justify-center min-w-0">
+                <div className="flex items-center whitespace-nowrap leading-none">
+                  <span className="font-extrabold text-[13px] xs:text-[15px] sm:text-xl tracking-tight text-[#0B192C]">
+                    SRI KRISHNA
+                  </span>
+                  <span className="font-bold sm:font-light text-[13px] xs:text-[15px] sm:text-xl tracking-wider text-orange-600 ml-1">
+                    TRADERS
+                  </span>
+                </div>
+                <p className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-wider text-slate-500 mt-1 hidden sm:block">
+                  Hardware & Building Materials
+                </p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-7">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600 transition-colors duration-200 relative group py-1"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+          </div>
+
+          {/* Right Action Buttons (Desktop) */}
+          <div className="hidden sm:flex items-center gap-4">
+            {/* Phone Quick Link */}
+            <a
+              href={`tel:${STORE_INFO.phone.replace(/\s+/g, '')}`}
+              className="flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-orange-600 py-2 px-3 rounded-lg hover:bg-slate-50 transition"
+            >
+              <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[#0B192C]">
+                <Phone className="w-3.5 h-3.5 text-orange-600" />
+              </div>
+              <div className="text-left">
+                <span className="block text-[10px] text-slate-500 font-normal">Call Project Desk</span>
+                <span>{STORE_INFO.phone}</span>
+              </div>
+            </a>
+
+            {/* Orange CTA Button */}
+            <button
+              onClick={onOpenQuote}
+              className="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-orange-600/20 hover:shadow-lg hover:shadow-orange-600/30 transition duration-200 cursor-pointer flex items-center gap-1.5"
+            >
+              <span>Enquiry</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Mobile Right Action: Enquiry Button on Right */}
+          <div className="flex items-center sm:hidden shrink-0">
+            <button
+              onClick={onOpenQuote}
+              className="bg-orange-600 active:bg-orange-700 text-white font-semibold text-xs px-3.5 py-2 rounded-lg shadow-sm cursor-pointer whitespace-nowrap"
+            >
+              Enquiry
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* ========================================================= */}
+      {/* MOBILE LEFT SIDE MENU DRAWER (Opens from Left Side)      */}
+      {/* ========================================================= */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex">
+          {/* Backdrop overlay */}
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-fade-in"
+            aria-hidden="true"
+          />
+
+          {/* Left Drawer Panel */}
+          <div className="relative w-72 sm:w-80 max-w-[85vw] bg-white h-full shadow-2xl flex flex-col justify-between z-10 animate-fade-in">
+            {/* Drawer Header */}
+            <div className="p-4 bg-[#0B192C] text-white flex items-center justify-between border-b border-slate-800">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">
+                  <Building2 className="w-4 h-4 text-orange-400" />
+                </div>
+                <div>
+                  <div className="font-extrabold text-sm tracking-tight leading-none">
+                    SRI KRISHNA <span className="text-orange-400">TRADERS</span>
+                  </div>
+                  <div className="text-[9px] text-slate-400 mt-0.5">Hardware & Materials</div>
+                </div>
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Nav Links */}
+            <div className="p-4 overflow-y-auto flex-1 space-y-1">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Navigation</p>
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition"
+                >
+                  <span>{link.name}</span>
+                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                </a>
+              ))}
+
+              {/* Dealership Pill in Drawer */}
+              <div className="pt-3 mt-3 border-t border-slate-100 px-3">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md">
+                  <Award className="w-3.5 h-3.5" />
+                  Official Santé Dealer
+                </span>
+              </div>
+            </div>
+
+            {/* Drawer Footer Actions */}
+            <div className="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+              <a
+                href={`tel:${STORE_INFO.phone.replace(/\s+/g, '')}`}
+                className="flex items-center gap-2.5 p-2.5 bg-white rounded-xl border border-slate-200 text-slate-800 shadow-xs"
+              >
+                <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+                  <Phone className="w-3.5 h-3.5" />
+                </div>
+                <div className="truncate">
+                  <div className="text-[10px] text-slate-500">Project Desk</div>
+                  <div className="text-xs font-bold text-slate-900 truncate">{STORE_INFO.phone}</div>
+                </div>
+              </a>
+
+              <a
+                href={`https://wa.me/919876543210`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 p-2.5 bg-white rounded-xl border border-slate-200 text-slate-800 shadow-xs"
+              >
+                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                  <MessageSquare className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-slate-500">WhatsApp Chat</div>
+                  <div className="text-xs font-bold text-emerald-600">Open Chat Now</div>
+                </div>
+              </a>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenQuote();
+                }}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md text-xs text-center flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Enquiry</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
