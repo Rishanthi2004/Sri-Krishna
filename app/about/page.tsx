@@ -4,7 +4,6 @@ import React from 'react';
 import About from '@/components/About';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import BrandsSection from '@/components/BrandsSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
 import CTASection from '@/components/CTASection';
 import { useQuote } from '@/context/QuoteContext';
 import { useRouter } from 'next/navigation';
@@ -23,9 +22,6 @@ export default function AboutPage() {
 
       {/* Authorized Brands */}
       <BrandsSection />
-
-      {/* Customer Trust & Reviews */}
-      <TestimonialsSection />
 
       {/* Call To Action */}
       <CTASection

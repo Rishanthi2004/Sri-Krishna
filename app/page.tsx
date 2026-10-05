@@ -7,7 +7,6 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import BrandsSection from '@/components/BrandsSection';
 import ProjectShowcase from '@/components/ProjectShowcase';
-import TestimonialsSection from '@/components/TestimonialsSection';
 import About from '@/components/About';
 import DeliverySection from '@/components/DeliverySection';
 import GallerySection from '@/components/GallerySection';
@@ -39,9 +38,6 @@ export default function HomePage() {
 
       {/* Project Deliveries & Fulfillment Showcase */}
       <ProjectShowcase onOpenQuote={() => openQuote()} />
-
-      {/* Customer Trust & Testimonials */}
-      <TestimonialsSection />
 
       {/* About Section */}
       <About />
