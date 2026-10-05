@@ -77,7 +77,7 @@ export const CATEGORIES_DATA: Category[] = [
     slug: "water-storage",
     description: "Durable multi-layer overhead water tanks, underground sumps, and automatic level controllers.",
     itemCount: "40+ Sizes",
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80",
     features: ["Anti-Bacterial Coating", "3 & 4 Layer Tanks", "UV Stabilized"]
   },
   {
@@ -152,7 +152,7 @@ export const PRODUCTS_DATA: Product[] = [
     categorySlug: "pipes-plumbing",
     description: "High impact resistance PVC pipes for rain drainage, soil waste, and electrical conduit lines.",
     specs: ["Smooth Internal Bore", "UV Protected Outer Layer", "Standard 3m & 6m Lengths"],
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80",
     isPopular: false,
     brand: "Heavy Duty PVC"
   },
@@ -163,7 +163,7 @@ export const PRODUCTS_DATA: Product[] = [
     categorySlug: "water-storage",
     description: "Heavy-duty UV stabilized food-grade virgin plastic water storage tank with thermal insulation.",
     specs: ["500L / 1000L / 2000L Capacities", "Anti-Algae Shield", "Threaded Leak-Proof Lid"],
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80",
     isPopular: true,
     brand: "AquaGuard Series"
   },
@@ -268,7 +268,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "gal-4",
     title: "Overhead Storage Yard",
     category: "Water Tanks",
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "gal-5",

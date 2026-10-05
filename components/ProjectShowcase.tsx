@@ -28,7 +28,7 @@ const SUPPLIES_DATA: ProjectSupply[] = [
     type: 'Overhead Tanks & Drainage',
     location: 'Royal Heights',
     materials: '4x 2000L Multi-Layer Tanks + Heavy Duty PVC Drainage',
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=600&q=80'
+    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80'
   },
   {
     id: 'supp-3',
