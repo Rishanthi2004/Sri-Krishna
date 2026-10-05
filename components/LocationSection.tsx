@@ -121,14 +121,19 @@ export default function LocationSection() {
           </div>
 
           {/* Interactive Map Visual (Right side) */}
-          <div className="lg:col-span-6 bg-slate-100 rounded-3xl overflow-hidden border border-slate-200 shadow-md relative h-96 sm:h-[420px] flex flex-col justify-between p-6">
+          <div
+            onClick={() => {
+              window.open(`https://maps.google.com/?q=Sri+Krishna+Traders`, '_blank');
+            }}
+            className="lg:col-span-6 bg-slate-100 rounded-3xl overflow-hidden border border-slate-200 shadow-md relative h-96 sm:h-[420px] flex flex-col justify-between p-6 cursor-pointer group"
+          >
             {/* Google Maps Style Clean Map Background Image */}
             <Image
               src="/images/map-preview.jpg"
               alt="Store Map Location"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
             />
             
             {/* Subtle overlay for high contrast of badges and markers */}
