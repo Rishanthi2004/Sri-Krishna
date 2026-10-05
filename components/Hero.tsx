@@ -44,9 +44,9 @@ export default function Hero({ onOpenQuote }: HeroProps) {
               </div>
 
               <h1 className="text-xl xs:text-2xl sm:text-3xl font-extrabold text-[#0B192C] leading-tight tracking-tight">
-                Complete Building Solutions <br />
+                Quality Products <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500">
-                  for Every Project
+                  for Every Home
                 </span>
               </h1>
 
@@ -124,9 +124,9 @@ export default function Hero({ onOpenQuote }: HeroProps) {
 
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem] font-extrabold text-[#0B192C] leading-[1.15] tracking-tight">
-              Complete Building Solutions <br className="hidden sm:inline" />
+              Quality Products <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500">
-                for Every Project
+                for Every Home
               </span>
             </h1>
 

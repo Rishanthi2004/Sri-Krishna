@@ -288,7 +288,7 @@ export const STORE_INFO = {
   name: "Sri Krishna Traders",
   tagline: "Quality Products • Trusted Service • On-Site Delivery",
   label: "QUALITY • TRUST • VALUE",
-  heroHeading: "Complete Building Solutions for Every Project",
+  heroHeading: "Quality Products for Every Home",
   heroSubtitle: "Premium bathroom fittings, electrical products, pipes, water storage solutions and essential building materials — all in one trusted place.",
   phone: "+91 98765 43210",
   phoneFormatted: "+91 98765 43210",
