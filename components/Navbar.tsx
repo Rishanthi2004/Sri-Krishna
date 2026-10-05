@@ -2,16 +2,28 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, Menu, X, Building2, ChevronRight, MessageSquare, Clock, MapPin, Layers, Award } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Phone, Menu, X, Building2, ChevronRight, MessageSquare, Award } from 'lucide-react';
 import { STORE_INFO } from '@/data/storeData';
+import { useQuote } from '@/context/QuoteContext';
 
 interface NavbarProps {
-  onOpenQuote: () => void;
+  onOpenQuote?: () => void;
 }
 
 export default function Navbar({ onOpenQuote }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const { openQuote } = useQuote();
+
+  const handleQuoteClick = () => {
+    if (onOpenQuote) {
+      onOpenQuote();
+    } else {
+      openQuote();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,26 +42,19 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
     }
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Products', href: '#products' },
-    { name: 'Services', href: '#services' },
-    { name: 'Brands', href: '#brands' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  // Close mobile menu on pathname change
+  useEffect(() => {
     setMobileMenuOpen(false);
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
+  }, [pathname]);
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Services', href: '/services' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Contact', href: '/contact' },
+  ];
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-300">
@@ -95,8 +100,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
             {/* Brand Logo & Name */}
             <Link 
-              href="#home" 
-              onClick={(e) => handleNavClick(e, '#home')}
+              href="/" 
               className="flex items-center gap-1.5 sm:gap-3 group focus:outline-none min-w-0"
             >
               <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#0B192C] to-[#1E3E62] flex items-center justify-center text-white shadow-md shadow-slate-900/10 group-hover:scale-105 transition-transform duration-300 shrink-0">
@@ -118,19 +122,27 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Routes: /, /about, /products, /services, /gallery, /contact) */}
           <div className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium text-slate-700 hover:text-orange-600 transition-colors duration-200 relative group py-1"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors duration-200 relative group py-1 ${
+                    isActive ? 'text-orange-600 font-semibold' : 'text-slate-700 hover:text-orange-600'
+                  }`}
+                >
+                  {link.name}
+                  <span
+                    className={`absolute bottom-0 left-0 h-0.5 bg-orange-600 transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  ></span>
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right Action Buttons (Desktop) */}
@@ -151,7 +163,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
 
             {/* Orange CTA Button */}
             <button
-              onClick={onOpenQuote}
+              onClick={handleQuoteClick}
               className="bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-orange-600/20 hover:shadow-lg hover:shadow-orange-600/30 transition duration-200 cursor-pointer flex items-center gap-1.5"
             >
               <span>Enquiry</span>
@@ -162,7 +174,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
           {/* Mobile Right Action: Enquiry Button on Right */}
           <div className="flex items-center sm:hidden shrink-0">
             <button
-              onClick={onOpenQuote}
+              onClick={handleQuoteClick}
               className="bg-orange-600 active:bg-orange-700 text-white font-semibold text-xs px-3.5 py-2 rounded-lg shadow-sm cursor-pointer whitespace-nowrap"
             >
               Enquiry
@@ -210,17 +222,24 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
             {/* Nav Links */}
             <div className="p-4 overflow-y-auto flex-1 space-y-1">
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Navigation</p>
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition"
-                >
-                  <span>{link.name}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-medium transition ${
+                      isActive
+                        ? 'bg-orange-50 text-orange-600 font-semibold'
+                        : 'text-slate-700 hover:bg-slate-50 hover:text-orange-600'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronRight className={`w-4 h-4 ${isActive ? 'text-orange-600' : 'text-slate-400'}`} />
+                  </Link>
+                );
+              })}
 
               {/* Dealership Pill in Drawer */}
               <div className="pt-3 mt-3 border-t border-slate-100 px-3">
@@ -264,7 +283,7 @@ export default function Navbar({ onOpenQuote }: NavbarProps) {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenQuote();
+                  handleQuoteClick();
                 }}
                 className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2.5 px-4 rounded-xl shadow-md text-xs text-center flex items-center justify-center gap-2 cursor-pointer"
               >

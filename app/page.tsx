@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
+import React from 'react';
 import Hero from '@/components/Hero';
 import CategoriesSection from '@/components/CategoriesSection';
 import WhyChooseUs from '@/components/WhyChooseUs';
@@ -14,64 +13,32 @@ import DeliverySection from '@/components/DeliverySection';
 import GallerySection from '@/components/GallerySection';
 import LocationSection from '@/components/LocationSection';
 import CTASection from '@/components/CTASection';
-import Footer from '@/components/Footer';
-import QuoteModal from '@/components/QuoteModal';
-import ProductDetailModal from '@/components/ProductDetailModal';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-import { Product } from '@/data/storeData';
+import { useQuote } from '@/context/QuoteContext';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [quoteCategory, setQuoteCategory] = useState<string>('');
-  const [quoteProduct, setQuoteProduct] = useState<string>('');
-
-  const handleOpenQuote = (category?: string, productName?: string) => {
-    setQuoteCategory(category || '');
-    setQuoteProduct(productName || '');
-    setIsQuoteOpen(true);
-  };
-
-  const handleEnquireProduct = (product: Product) => {
-    setSelectedProduct(product);
-  };
-
-  const handleCategorySelect = (categorySlug: string) => {
-    const elem = document.getElementById('products');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleContactClick = () => {
-    const elem = document.getElementById('contact');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const { openQuote, openProductDetail } = useQuote();
+  const router = useRouter();
 
   return (
-    <main className="min-h-screen flex flex-col bg-white overflow-x-hidden selection:bg-orange-500 selection:text-white">
-      {/* Sticky Header with Announcement Bar */}
-      <Navbar onOpenQuote={() => handleOpenQuote()} />
+    <>
+      {/* Main Hero Section */}
+      <Hero onOpenQuote={() => openQuote()} />
 
-      {/* Main Hero Section inspired by FlowRight layout */}
-      <Hero onOpenQuote={() => handleOpenQuote()} />
+      {/* Product Categories */}
+      <CategoriesSection onSelectCategory={() => router.push('/products')} />
 
-      {/* Product Categories (with floating round icon cards) */}
-      <CategoriesSection onSelectCategory={handleCategorySelect} />
+      {/* Split Why Choose Us Section */}
+      <WhyChooseUs onContactClick={() => router.push('/contact')} />
 
-      {/* Split Why Choose Us Section (Dark Navy Box + 4 Icon Benefit Cards) */}
-      <WhyChooseUs onContactClick={handleContactClick} />
-
-      {/* Featured Products with Category Tabs and Enquire Action */}
-      <FeaturedProducts onEnquireProduct={handleEnquireProduct} />
+      {/* Featured Products with Category Tabs */}
+      <FeaturedProducts onEnquireProduct={(prod) => openProductDetail(prod)} />
 
       {/* Dedicated Santé Bath Fittings Brand Section */}
       <BrandsSection />
 
       {/* Project Deliveries & Fulfillment Showcase */}
-      <ProjectShowcase onOpenQuote={() => handleOpenQuote()} />
+      <ProjectShowcase onOpenQuote={() => openQuote()} />
 
       {/* Customer Trust & Testimonials */}
       <TestimonialsSection />
@@ -80,7 +47,7 @@ export default function HomePage() {
       <About />
 
       {/* Made for Easy, Practical Shopping (Delivery & Services) */}
-      <DeliverySection onOpenQuote={() => handleOpenQuote()} />
+      <DeliverySection onOpenQuote={() => openQuote()} />
 
       {/* Store & Inventory Gallery */}
       <GallerySection />
@@ -90,31 +57,9 @@ export default function HomePage() {
 
       {/* Full-width Call To Action Section */}
       <CTASection
-        onOpenQuote={() => handleOpenQuote()}
-        onContactClick={handleContactClick}
+        onOpenQuote={() => openQuote()}
+        onContactClick={() => router.push('/contact')}
       />
-
-      {/* Multi-column Footer */}
-      <Footer />
-
-      {/* Interactive Modals */}
-      <QuoteModal
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-        initialCategory={quoteCategory}
-        initialProduct={quoteProduct}
-      />
-
-      <ProductDetailModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        onRequestQuote={(prod) => {
-          setSelectedProduct(null);
-          handleOpenQuote(prod.category, prod.name);
-        }}
-      />
-      {/* Fixed Floating WhatsApp on Middle-Right */}
-      <FloatingWhatsApp />
-    </main>
+    </>
   );
 }

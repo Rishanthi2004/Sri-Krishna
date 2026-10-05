@@ -2,8 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Phone, MessageSquare, Mail, MapPin, Clock, ArrowUp, ChevronRight } from 'lucide-react';
+import { Building2, Phone, MessageSquare, Mail, MapPin, Clock, ArrowUp, ChevronRight } from 'lucide-react';
 import { STORE_INFO } from '@/data/storeData';
 
 export default function Footer() {
@@ -12,33 +11,22 @@ export default function Footer() {
   };
 
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Products', href: '#products' },
-    { name: 'Services', href: '#services' },
-    { name: 'Brands', href: '#brands' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Services', href: '/services' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const productCategories = [
-    { name: 'Bathroom & Sanitary Ware', href: '#products' },
-    { name: 'Electrical Goods', href: '#products' },
-    { name: 'Pipes & Plumbing', href: '#products' },
-    { name: 'Water Storage', href: '#products' },
-    { name: 'Building Materials', href: '#products' },
-    { name: 'Hardware Essentials', href: '#products' },
+    { name: 'Bathroom & Sanitary Ware', href: '/products' },
+    { name: 'Electrical Goods', href: '/products' },
+    { name: 'Pipes & Plumbing', href: '/products' },
+    { name: 'Water Storage', href: '/products' },
+    { name: 'Building Materials', href: '/products' },
+    { name: 'Hardware Essentials', href: '/products' },
   ];
-
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
 
   return (
     <footer className="bg-[#07111E] text-slate-400 text-sm border-t border-slate-800/80">
@@ -53,28 +41,22 @@ export default function Footer() {
           className="w-full bg-[#112338] hover:bg-[#19324f] text-slate-200 py-3 text-center text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 border-b border-slate-800 active:bg-slate-800 transition cursor-pointer"
         >
           <span>Back to top</span>
-          <ArrowUp className="w-3.5 h-3.5 text-amber-400" />
+          <ArrowUp className="w-3.5 h-3.5 text-orange-400" />
         </button>
 
         <div className="px-5 py-6 space-y-6">
           {/* Brand header */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-amber-500/30 bg-[#121D2C] flex items-center justify-center">
-                <Image
-                  src="/logo.svg"
-                  alt="Sri Krishna Traders"
-                  width={32}
-                  height={32}
-                  className="object-contain w-full h-full"
-                />
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-white">
+                <Building2 className="w-4 h-4 text-orange-400" />
               </div>
               <div>
-                <span className="font-bold text-sm text-white tracking-tight">Sri Krishna</span>{' '}
-                <span className="font-light text-sm text-amber-400">TRADERS</span>
+                <span className="font-bold text-sm text-white tracking-tight">SRI KRISHNA</span>{' '}
+                <span className="font-light text-sm text-orange-500">TRADERS</span>
               </div>
-            </div>
-            <span className="text-[10px] font-semibold text-amber-400 bg-slate-800/90 px-2 py-0.5 rounded border border-slate-700">
+            </Link>
+            <span className="text-[10px] font-semibold text-orange-400 bg-slate-800/90 px-2 py-0.5 rounded border border-slate-700">
               Santé Dealer
             </span>
           </div>
@@ -89,13 +71,12 @@ export default function Footer() {
               <ul className="space-y-2">
                 {quickLinks.slice(0, 5).map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
-                      onClick={(e) => handleSmoothScroll(e, item.href)}
-                      className="text-slate-300 hover:text-amber-400 transition block truncate"
+                      className="text-slate-300 hover:text-orange-400 transition block truncate"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -109,13 +90,12 @@ export default function Footer() {
               <ul className="space-y-2">
                 {productCategories.slice(0, 5).map((cat) => (
                   <li key={cat.name}>
-                    <a
+                    <Link
                       href={cat.href}
-                      onClick={(e) => handleSmoothScroll(e, cat.href)}
-                      className="text-slate-300 hover:text-amber-400 transition block truncate"
+                      className="text-slate-300 hover:text-orange-400 transition block truncate"
                     >
                       {cat.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -131,7 +111,7 @@ export default function Footer() {
                   href={`tel:${STORE_INFO.phone.replace(/\s+/g, '')}`}
                   className="flex items-center gap-1.5 p-2 bg-slate-900/90 rounded-lg border border-slate-800 text-slate-200"
                 >
-                  <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <Phone className="w-3.5 h-3.5 text-orange-400 shrink-0" />
                   <span className="truncate">{STORE_INFO.phone}</span>
                 </a>
                 <a
@@ -145,7 +125,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="flex items-start gap-1.5 text-[11px] text-slate-400 pt-1">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="w-3.5 h-3.5 text-orange-400 shrink-0 mt-0.5" />
                 <span className="line-clamp-1">{STORE_INFO.address}</span>
               </div>
             </div>
@@ -154,7 +134,7 @@ export default function Footer() {
           {/* Compact Store Hours & Copyright */}
           <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400 space-y-1.5 text-center">
             <div className="flex items-center justify-center gap-1.5 text-slate-300 font-medium">
-              <Clock className="w-3 h-3 text-amber-400" />
+              <Clock className="w-3 h-3 text-orange-400" />
               <span>Mon-Sat: 8AM-9PM • Sun: 8AM-6:30PM</span>
             </div>
             <p className="text-slate-500 pt-1">© 2026 Sri Krishna Traders. All rights reserved.</p>
@@ -163,26 +143,20 @@ export default function Footer() {
       </div>
 
       {/* ========================================================================= */}
-      {/* DESKTOP & TABLET FOOTER (Unchanged) - Visible only on md+ screens        */}
+      {/* DESKTOP & TABLET FOOTER (Unchanged Layout) - Visible only on md+ screens */}
       {/* ========================================================================= */}
       <div className="hidden md:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-800">
           
           {/* Column 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <Link href="#home" onClick={(e) => handleSmoothScroll(e, '#home')} className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full overflow-hidden shrink-0 border border-amber-500/30 bg-[#121D2C] flex items-center justify-center shadow-md">
-                <Image
-                  src="/logo.svg"
-                  alt="Sri Krishna Traders"
-                  width={44}
-                  height={44}
-                  className="object-contain w-full h-full"
-                />
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 flex items-center justify-center text-white shadow-sm">
+                <Building2 className="w-5 h-5 text-orange-400" />
               </div>
               <div>
-                <span className="font-extrabold text-xl tracking-tight text-white">Sri Krishna</span>{' '}
-                <span className="font-light text-xl text-amber-400">TRADERS</span>
+                <span className="font-extrabold text-xl tracking-tight text-white">SRI KRISHNA</span>{' '}
+                <span className="font-light text-xl text-orange-500">TRADERS</span>
                 <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400 -mt-0.5">
                   Hardware & Building Materials
                 </p>
@@ -194,7 +168,7 @@ export default function Footer() {
             </p>
 
             <div className="pt-2">
-              <span className="inline-block px-3 py-1 bg-slate-800 text-amber-400 text-xs font-semibold rounded-lg border border-slate-700">
+              <span className="inline-block px-3 py-1 bg-slate-800 text-orange-400 text-xs font-semibold rounded-lg border border-slate-700">
                 Official Santé Bath Fittings Dealer
               </span>
             </div>
@@ -206,14 +180,13 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {quickLinks.map((item) => (
                 <li key={item.name}>
-                  <a
+                  <Link
                     href={item.href}
-                    onClick={(e) => handleSmoothScroll(e, item.href)}
-                    className="text-slate-400 hover:text-amber-400 transition-colors duration-200 text-xs sm:text-sm flex items-center gap-1.5"
+                    className="text-slate-400 hover:text-orange-400 transition-colors duration-200 text-xs sm:text-sm flex items-center gap-1.5"
                   >
                     <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
                     <span>{item.name}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -225,14 +198,13 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {productCategories.map((cat) => (
                 <li key={cat.name}>
-                  <a
+                  <Link
                     href={cat.href}
-                    onClick={(e) => handleSmoothScroll(e, cat.href)}
-                    className="text-slate-400 hover:text-amber-400 transition-colors duration-200 text-xs sm:text-sm flex items-center gap-1.5"
+                    className="text-slate-400 hover:text-orange-400 transition-colors duration-200 text-xs sm:text-sm flex items-center gap-1.5"
                   >
-                    <span className="w-1 h-1 rounded-full bg-amber-500"></span>
+                    <span className="w-1 h-1 rounded-full bg-orange-500"></span>
                     <span>{cat.name}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -244,12 +216,12 @@ export default function Footer() {
             
             <div className="space-y-3 text-xs sm:text-sm">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
                 <span className="text-slate-300">{STORE_INFO.address}</span>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                <Phone className="w-4 h-4 text-orange-400 shrink-0" />
                 <a href={`tel:${STORE_INFO.phone.replace(/\s+/g, '')}`} className="text-slate-300 hover:text-white transition">
                   {STORE_INFO.phone}
                 </a>
@@ -268,14 +240,14 @@ export default function Footer() {
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+                <Mail className="w-4 h-4 text-orange-400 shrink-0" />
                 <span className="text-slate-300">{STORE_INFO.email}</span>
               </div>
             </div>
 
             <div className="pt-2 border-t border-slate-800 text-xs space-y-1">
               <div className="font-semibold text-slate-200 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-amber-400" />
+                <Clock className="w-3.5 h-3.5 text-orange-400" />
                 <span>Store Timings:</span>
               </div>
               <div className="text-slate-400 pl-5">
@@ -296,7 +268,7 @@ export default function Footer() {
             className="flex items-center gap-2 text-slate-400 hover:text-white transition px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 cursor-pointer"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-amber-400" />
+            <ArrowUp className="w-3.5 h-3.5 text-orange-400" />
           </button>
         </div>
       </div>

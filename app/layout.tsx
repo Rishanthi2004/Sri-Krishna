@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import ClientLayout from "@/components/ClientLayout";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-[#F8FAFC] text-[#0F172A] min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
-        {children}
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
