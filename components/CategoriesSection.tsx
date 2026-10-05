@@ -21,7 +21,7 @@ export default function CategoriesSection({ onSelectCategory }: CategoriesSectio
             <span>Full Range Inventory</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B192C] tracking-tight">
-            Everything You Need for Your Project
+            Everything You Need, All in One Place
           </h2>
           <p className="text-slate-600 text-base sm:text-lg">
             Reliable products for homes, construction projects and everyday requirements.
