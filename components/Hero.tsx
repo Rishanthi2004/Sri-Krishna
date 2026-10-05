@@ -55,19 +55,18 @@ export default function Hero({ onOpenQuote }: HeroProps) {
               </p>
             </div>
 
-            {/* Compact Right-Aligned Hero Image with Enhanced Brightness */}
+            {/* Compact Right-Aligned Hero Image with High Brightness & Vivid Clarity */}
             <div className="w-28 xs:w-34 sm:w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-white bg-slate-900 shrink-0 relative mt-0.5">
               <Image
                 src="/images/store-interior.png"
                 alt="Sri Krishna Traders Storefront & Counter"
                 fill
                 sizes="(max-width: 640px) 45vw, 35vw"
-                className="object-cover object-center brightness-[1.14] contrast-[1.06] saturate-[1.05]"
+                className="object-cover object-center brightness-[1.30] contrast-[1.12] saturate-[1.10]"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"></div>
               <div className="absolute bottom-1 left-1 right-1 text-center">
-                <span className="inline-block px-1.5 py-0.5 bg-orange-600/90 text-[8px] font-bold text-white rounded uppercase tracking-wider shadow-xs">
+                <span className="inline-block px-1.5 py-0.5 bg-orange-600/95 text-[8px] font-bold text-white rounded uppercase tracking-wider shadow-sm">
                   Storefront
                 </span>
               </div>
@@ -174,7 +173,7 @@ export default function Hero({ onOpenQuote }: HeroProps) {
             </div>
           </div>
 
-          {/* Right Column: Hero Visual & Badges with Brightness Filter */}
+          {/* Right Column: Hero Visual & Badges with Extra High Brightness & Clarity */}
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               
@@ -185,23 +184,23 @@ export default function Hero({ onOpenQuote }: HeroProps) {
                   alt="Sri Krishna Traders Hardware & Building Materials Store"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center brightness-[1.14] contrast-[1.06] saturate-[1.05] hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center brightness-[1.30] contrast-[1.12] saturate-[1.10] hover:scale-105 transition-transform duration-700"
                   priority
                 />
                 
-                {/* Subtle Light Bottom Vignette */}
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/60 via-slate-950/20 to-transparent pointer-events-none"></div>
+                {/* Ultra Light Gradient for High Visibility */}
+                <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"></div>
                 
                 {/* Bottom Store Title Overlay */}
-                <div className="absolute bottom-3.5 left-4 right-4 text-white flex items-end justify-between pointer-events-none">
+                <div className="absolute bottom-3 left-4 right-4 text-white flex items-end justify-between pointer-events-none">
                   <div>
-                    <span className="inline-block px-2.5 py-0.5 bg-orange-600 text-[10px] font-bold rounded uppercase tracking-wider mb-1">
+                    <span className="inline-block px-2.5 py-0.5 bg-orange-600 text-[10px] font-bold rounded uppercase tracking-wider mb-1 shadow-sm">
                       Storefront & Showroom
                     </span>
-                    <p className="font-bold text-base leading-tight drop-shadow-sm">
+                    <p className="font-bold text-base leading-tight drop-shadow-md">
                       Sri Krishna Traders — Retail & Project Counter
                     </p>
-                    <p className="text-xs text-slate-200 mt-0.5 drop-shadow-sm">
+                    <p className="text-xs text-slate-100 mt-0.5 drop-shadow-md">
                       Hardware, Pipes, Electricals & Santé Bath Fittings
                     </p>
                   </div>
